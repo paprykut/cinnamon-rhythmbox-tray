@@ -8,7 +8,8 @@
 # Some of the code is taken from rhythmbox-systray by Elder Marco, kudos.
 #
 
-from gi.repository import GObject, RB, Peas
+from gi.repository import GObject, Peas
+
 
 class HideRhythmbox(GObject.Object, Peas.Activatable):
     object = GObject.property(type=GObject.Object)
@@ -26,10 +27,10 @@ class HideRhythmbox(GObject.Object, Peas.Activatable):
         # We need to handle the delete-event signal in order to make possible
         # to us to minimize Rhythmbox to the system tray when the user tries
         # to close the main window.
-        self.window = self.shell.get_property ('window')
-        self.window_id = self.window.connect ('delete-event',
-                                               self.delete_event_cb)
-        
+        self.window = self.shell.get_property('window')
+        self.window_id = self.window.connect('delete-event',
+                                             self.delete_event_cb)
+
     def do_deactivate(self):
         """
         Deactivate.
@@ -38,7 +39,7 @@ class HideRhythmbox(GObject.Object, Peas.Activatable):
         self.window.disconnect(self.window_id)
         del self.window
 
-    def delete_event_cb (self, widget, event):
+    def delete_event_cb(self, widget, event):
         """
         Hide the main window.
         """
